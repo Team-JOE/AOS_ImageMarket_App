@@ -23,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/duck"
                 />
             <ImageView
                 android:layout_width="match_parent"
@@ -41,7 +40,8 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:paddingVertical="12dp">
+        android:paddingVertical="8dp"
+        >
         <TextView
             android:id="@+id/cart_tv_sellUserName"
             android:layout_width="match_parent"
@@ -49,6 +49,7 @@
             android:layout_weight="1"
             android:text="이미지 판매 유저 이름"
             android:textSize="12dp"
+            android:textColor="#333"
             />
         <TextView
             android:id="@+id/cart_tv_imageTitle"
@@ -56,8 +57,8 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="이미지 타이틀"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:gravity="center_vertical"
             />
         <TextView
@@ -66,8 +67,8 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="1,000원"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:gravity="center_vertical"
             />
     </LinearLayout>
