@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aosproject.imagemarket.Adapter.ImageDetailAdapterHJ;
 import com.aosproject.imagemarket.Bean.DealHJ;
 import com.aosproject.imagemarket.Bean.ImageHJ;
+import com.aosproject.imagemarket.NetworkTask.CartNetworkTaskHK;
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskDealHJ;
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskImageHJ;
 import com.aosproject.imagemarket.R;
@@ -361,7 +362,7 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.detail_ivbtn_back:
                     finish();
                     break;
@@ -373,7 +374,7 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // *************************** 효경님 구매 페이지 연결 ****************************
-                                    Intent intent = new Intent(ImageDetailActivity.this, ImageAddNameActivity.class);
+                                    Intent intent = new Intent(ImageDetailActivity.this, DealItemActivityHK.class);
                                     // *************************** 효경님 구매 페이지 연결 ****************************
                                     intent.putExtra("code", code);
                                     startActivity(intent);
@@ -390,7 +391,7 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // *************************** 효경님 구매 페이지 연결 ****************************
-                                    Intent intent = new Intent(ImageDetailActivity.this, ImageAddTagActivity.class);
+                                    Intent intent = new Intent(ImageDetailActivity.this, DealItemActivityHK.class);
                                     // *************************** 효경님 구매 페이지 연결 ****************************
                                     intent.putExtra("code", code);
                                     startActivity(intent);
@@ -400,42 +401,128 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
                             .show();
                     break;
                 case R.id.detail_btn_cart:
-                    new AlertDialog.Builder(ImageDetailActivity.this)
-                            .setMessage("해당 이미지를 장바구니에 담았습니다.\n장바구니로 이동하시겠습니까?")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // *************************** 효경님 장바구니 페이지 연결 ****************************
-                                    Intent intent = new Intent(ImageDetailActivity.this, ImageAddNameActivity.class);
-                                    // *************************** 효경님 장바구니 페이지 연결 ****************************
-                                    intent.putExtra("code", code);
-                                    startActivity(intent);
-                                }
-                            })
-                            .setNegativeButton("Cancel", null)
-                            .show();
+                    // 동일한 이미지가 이미 장바구니에 있을 경우
+                    String checkImage = checkCartItem(code);
+                    if (checkImage.equals("true")) {
+                        new AlertDialog.Builder(ImageDetailActivity.this)
+                                .setMessage("해당 상품은 이미 장바구니에 담겨있습니다.\n장바구니로 이동하시겠습니까?")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                        Intent intent = new Intent(ImageDetailActivity.this, MainActivity.class);
+                                        // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                        intent.putExtra("cart", 3);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null)
+                                .show();
+                    } else {
+                        // cart insert
+                        String insertItem = insertItemToCart(code);
+                        if (insertItem.equals("1")) {
+                            new AlertDialog.Builder(ImageDetailActivity.this)
+                                    .setMessage("해당 이미지를 장바구니에 담았습니다.\n장바구니로 이동하시겠습니까?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                            Intent intent = new Intent(ImageDetailActivity.this, MainActivity.class);
+                                            // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                            intent.putExtra("cart", 3);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", null)
+                                    .show();
+                        } else {
+                            Toast.makeText(ImageDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     break;
+
                 case R.id.detail_btn_cart_slide:
-                    new AlertDialog.Builder(ImageDetailActivity.this)
-                            .setMessage("해당 이미지를 장바구니에 담았습니다.\n장바구니로 이동하시겠습니까?")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // *************************** 효경님 장바구니 페이지 연결 ****************************
-                                    Intent intent = new Intent(ImageDetailActivity.this, ImageAddTagActivity.class);
-                                    // *************************** 효경님 장바구니 페이지 연결 ****************************
-                                    intent.putExtra("code", code);
-                                    startActivity(intent);
-                                }
-                            })
-                            .setNegativeButton("Cancel", null)
-                            .show();
+                    checkImage = checkCartItem(code);
+                    if (checkImage.equals("true")) {
+                        new AlertDialog.Builder(ImageDetailActivity.this)
+                                .setMessage("해당 상품은 이미 장바구니에 담겨있습니다.\n장바구니로 이동하시겠습니까?")
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                        Intent intent = new Intent(ImageDetailActivity.this, MainActivity.class);
+                                        // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                        intent.putExtra("cart", 3);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null)
+                                .show();
+                    } else {
+                        // cart insert
+                        // cart insert
+                        String insertItem = insertItemToCart(code);
+                        if (insertItem.equals("1")) {
+                            new AlertDialog.Builder(ImageDetailActivity.this)
+                                    .setMessage("해당 이미지를 장바구니에 담았습니다.\n장바구니로 이동하시겠습니까?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                            Intent intent = new Intent(ImageDetailActivity.this, MainActivity.class);
+                                            // *************************** 효경님 장바구니 페이지 연결 ****************************
+                                            intent.putExtra("cart", 3);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", null)
+                                    .show();
+                        } else {
+                            Toast.makeText(ImageDetailActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     break;
             }
         }
     };
+
+    // 장바구니에 이미 해당 이미지가 담겨있는지 확인
+    private String checkCartItem(int imageCode) {
+        String result = null;
+        String urlAddr = ShareVar.macIP + "jsp/cart_select_item_check_HK.jsp?imageCode=" + imageCode + "&loginEmail=" + ShareVar.loginEmail;
+        try {
+            CartNetworkTaskHK networkTask = new CartNetworkTaskHK(ImageDetailActivity.this, urlAddr, "check");
+            Object obj = networkTask.execute().get();
+            result = (String) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private String insertItemToCart(int imageCode) {
+        String result = null;
+        String urlAddr = ShareVar.macIP + "jsp/cart_insert_item_HK.jsp?imageCode=" + imageCode + "&loginEmail=" + ShareVar.loginEmail;
+        try {
+            CartNetworkTaskHK networkTask = new CartNetworkTaskHK(ImageDetailActivity.this, urlAddr, "insert");
+            Object obj = networkTask.execute().get();
+            result = (String) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
