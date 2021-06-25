@@ -37,6 +37,9 @@
         <activity android:name=".Activity.BuyList" />
         <activity android:name=".Activity.MyPage_Account" />
         <activity android:name=".Activity.MyPage" />
+        <activity android:name=".Activity.DealItemActivityHK" />
+        <activity android:name=".Activity.DealCompeletedActivityHK" />
+        <activity android:name=".Activity.DealCartItemActivityHK" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
