@@ -228,8 +228,8 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
             switch (v.getId()){
                 case R.id.edit_delete_ivbtn_back:
                     // *************************** 도희님 판매목록 페이지 연결 ****************************
-                    //intent = new Intent(ImageEditDeleteActivity.this, ImgList.class);
-                    intent = new Intent(ImageEditDeleteActivity.this, HomeFragment.class);
+                    intent = new Intent(ImageEditDeleteActivity.this, ImgList.class);
+//                    intent = new Intent(ImageEditDeleteActivity.this, HomeFragment.class);
                     // *************************** 도희님 판매목록 페이지 연결 ****************************
                     startActivity(intent);
                     break;
@@ -268,8 +268,8 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
                                                         // *************************** 도희님 판매목록 페이지 연결 ****************************
-                                                        //Intent intent = new Intent(ImageEditDeleteActivity.this, ImgList.class);
-                                                        Intent intent = new Intent(ImageEditDeleteActivity.this, ImageAddImageActivity.class);
+                                                        Intent intent = new Intent(ImageEditDeleteActivity.this, ImgList.class);
+//                                                        Intent intent = new Intent(ImageEditDeleteActivity.this, ImageAddImageActivity.class);
                                                         // *************************** 도희님 판매목록 페이지 연결 ****************************
                                                         startActivity(intent);
                                                     }
