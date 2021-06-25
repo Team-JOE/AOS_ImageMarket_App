@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.aosproject.imagemarket.R;
+
 public class UserDelete extends AppCompatActivity {
 
     @Override
