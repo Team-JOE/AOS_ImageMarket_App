@@ -135,4 +135,5 @@ public class BuyListBean {
     public void setBuyEmail(String buyEmail) {
         this.buyEmail = buyEmail;
     }
+
 }
