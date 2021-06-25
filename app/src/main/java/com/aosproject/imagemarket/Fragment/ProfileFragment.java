@@ -14,11 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.aosproject.imagemarket.Activity.BuyList;
+import com.aosproject.imagemarket.Activity.ImageAddImageActivity;
 import com.aosproject.imagemarket.Activity.ImgList;
 import com.aosproject.imagemarket.Activity.MyPage;
 import com.aosproject.imagemarket.Activity.RecommendList;
 import com.aosproject.imagemarket.Activity.SellList;
 import com.aosproject.imagemarket.Activity.SellReport;
+import com.aosproject.imagemarket.Activity.UserDelete;
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskProfileMain;
 import com.aosproject.imagemarket.R;
 
@@ -147,8 +149,8 @@ public class ProfileFragment extends Fragment {
                     break;
                 case R.id.profile_tv_img_add:
                     // 혜지언니 이미지 등록 intent
-//                    intent = new Intent(getActivity(), ImageAddImageActivity.class);
-//                    startActivity(intent);
+                    intent = new Intent(getActivity(), ImageAddImageActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.profile_tv_sell_report:
                     intent = new Intent(getActivity(), SellReport.class);
@@ -158,7 +160,8 @@ public class ProfileFragment extends Fragment {
                     // 로그아웃
                     break;
                 case R.id.profile_tv_user_delete:
-                    // 회원탈퇴
+                    intent = new Intent(getActivity(), UserDelete.class);
+                    startActivity(intent);
                     break;
             }
         }
