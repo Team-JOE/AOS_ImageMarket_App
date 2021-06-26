@@ -32,7 +32,6 @@ public class ProfileFragment extends Fragment {
     LinearLayout profile_linearlayout_mypage, profile_layout_buy_list, profile_layout_sell_list, profile_layout_like_list;
     TextView profile_tv_name, profile_tv_buy_num, profile_tv_sell_num, profile_tv_like_num, profile_tv_img_list, profile_tv_img_add, profile_tv_sell_report, profile_tv_logout, profile_tv_user_delete;
     String name, buy, sell, recommend;
-//    String urlAddr;
 
     @Nullable
     @Override

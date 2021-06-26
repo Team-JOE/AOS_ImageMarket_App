@@ -58,9 +58,7 @@ public class RecommendList extends Activity implements RecommendListClickListene
     private void connectGetData() {
         try {
 
-            Log.v("Chk", "BuyList_connectGetData");
             NetworkTaskRecommendList networkTask = new NetworkTaskRecommendList(RecommendList.this, urlAddr, "select");
-            Log.v("Chk", "BuyList_connectGetData_NetworkTaskProfileMain");
             Object obj = networkTask.execute().get();
             recommendlist = (ArrayList<RecommendListBean>) obj;
 

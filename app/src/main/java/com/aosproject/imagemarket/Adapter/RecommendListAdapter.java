@@ -109,21 +109,6 @@ public class RecommendListAdapter extends BaseAdapter {
         return convertView;
     }
 
-//    View.OnClickListener onClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//
-//            String result = connectInsertData(imgCode);
-//            if(result.equals("0")) {
-//                Toast.makeText(mContext, "추천 취소를 실패하였습니다.", Toast.LENGTH_SHORT).show();
-//            }else {
-//                Toast.makeText(mContext, "추천을 취소했습니다.", Toast.LENGTH_SHORT).show();
-//                listener.onRecommendListClickListener(true);
-//            }
-//
-//        }
-//    };
-
     private String connectInsertData(int code) {
 
         Log.v("Chk", "RecommendListAdapter connectInsertData imgCode : " + code);
