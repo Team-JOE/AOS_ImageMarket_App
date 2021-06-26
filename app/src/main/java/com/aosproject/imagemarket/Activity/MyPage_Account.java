@@ -55,7 +55,7 @@ public class MyPage_Account extends AppCompatActivity {
         et_number = findViewById(R.id.profile_et_mypage_account_number);
         btn_update = findViewById(R.id.profile_btn_mypage_account_update);
 
-        if (bank.equals("non")) {
+        if (bank.equals("none")) {
             tv_bank.setText("은행을 선택하세요.");
         }else {
             tv_bank.setText(bank);

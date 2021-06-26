@@ -64,6 +64,7 @@ public class SellReport extends AppCompatActivity {
 
         layout_null = findViewById(R.id.profile_layout_sellreport_null);
         layout_null.setVisibility(View.INVISIBLE);
+        lv_best_items.setVisibility(View.VISIBLE);
 
         iv_back.setOnClickListener(onClickListener);
         iv_light.setOnClickListener(onClickListener);

@@ -40,8 +40,6 @@ public class ProfileFragment extends Fragment {
        setHasOptionsMenu(true);
        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Log.v("Chk", "ProfileFragment_onCreateView");
-
         profile_linearlayout_mypage = view.findViewById(R.id.profile_linearlayout_mypage);
         profile_tv_name = view.findViewById(R.id.profile_tv_name);
         profile_layout_buy_list = view.findViewById(R.id.profile_layout_buy_list);
@@ -55,8 +53,6 @@ public class ProfileFragment extends Fragment {
         profile_tv_sell_report = view.findViewById(R.id.profile_tv_sell_report);
         profile_tv_logout = view.findViewById(R.id.profile_tv_logout);
         profile_tv_user_delete = view.findViewById(R.id.profile_tv_user_delete);
-
-        Log.v("Chk", "ProfileFragment_onCreateView_id");
 
         profile_linearlayout_mypage.setOnClickListener(onClickListener);
         profile_layout_buy_list.setOnClickListener(onClickListener);
@@ -76,42 +72,31 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.v("Chk", "ProfileFragment_onResume_start");
-
         connectGetData();
-
-        Log.v("Chk", "ProfileFragment_onResume_connectGetData");
 
         profile_tv_name.setText(name);
         profile_tv_buy_num.setText(buy);
         profile_tv_sell_num.setText(sell);
         profile_tv_like_num.setText(recommend);
-
-        Log.v("Chk", "ProfileFragment_onResume_setText");
     }
 
     private void connectGetData() {
-        Log.v("Chk", "ProfileFragment_connectGetData");
         try {
             NetworkTaskProfileMain networkTaskName = new NetworkTaskProfileMain(getActivity(), macIP + "jsp/profile_main_name.jsp?loginEmail=" + loginEmail, "profile_main");
             Object objName = networkTaskName.execute().get();
             name = (String) objName;
-            Log.v("Chk", "ProfileFragment : " + name);
 
             NetworkTaskProfileMain networkTaskBuy = new NetworkTaskProfileMain(getActivity(), macIP + "jsp/profile_main_buy.jsp?loginEmail=" + loginEmail, "profile_main");
             Object objBuy = networkTaskBuy.execute().get();
             buy = (String) objBuy;
-            Log.v("Chk", "ProfileFragment : " + buy);
 
             NetworkTaskProfileMain networkTaskSell = new NetworkTaskProfileMain(getActivity(), macIP + "jsp/profile_main_sell.jsp?loginEmail=" + loginEmail, "profile_main");
             Object objSell = networkTaskSell.execute().get();
             sell = (String) objSell;
-            Log.v("Chk", "ProfileFragment : " + sell);
 
             NetworkTaskProfileMain networkTaskRecommend = new NetworkTaskProfileMain(getActivity(), macIP + "jsp/profile_main_recommend.jsp?loginEmail=" + loginEmail, "profile_main");
             Object objRecommend = networkTaskRecommend.execute().get();
             recommend = (String) objRecommend;
-            Log.v("Chk", "ProfileFragment : " + recommend);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,16 +109,12 @@ public class ProfileFragment extends Fragment {
             Intent intent = null;
             switch(v.getId()) {
                 case R.id.profile_linearlayout_mypage:
-                    Log.v("Chk", "ProfileFragment_onClickListener_MyPage_start");
                     intent = new Intent(getActivity(), MyPage.class);
                     startActivity(intent);
-                    Log.v("Chk", "ProfileFragment_onClickListener_MyPage_end");
                     break;
                 case R.id.profile_layout_buy_list:
-                    Log.v("Chk", "ProfileFragment_onClickListener_BuyList_start");
                     intent = new Intent(getActivity(), BuyList.class);
                     startActivity(intent);
-                    Log.v("Chk", "ProfileFragment_onClickListener_BuyList_end");
                     break;
                 case R.id.profile_layout_sell_list:
                     intent = new Intent(getActivity(), SellList.class);

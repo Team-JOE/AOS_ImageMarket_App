@@ -125,7 +125,7 @@
                 <LinearLayout
                     android:id="@+id/profile_layout_mypage_pw_chk"
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
                     <TextView

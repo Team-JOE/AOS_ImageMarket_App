@@ -63,6 +63,7 @@ public class MyPage extends Activity {
         profile_tv_mypage_name_save.setVisibility(View.INVISIBLE);
         profile_tv_mypage_phone_save.setVisibility(View.INVISIBLE);
         profile_tv_mypage_pw_msg.setVisibility(View.INVISIBLE);
+        profile_layout_mypage_pw_chk.setVisibility(View.GONE);
 
         profile_et_mypage_pw.setOnFocusChangeListener(onFocusListener);
         profile_et_mypage_name.setOnFocusChangeListener(onFocusListener);
@@ -95,12 +96,12 @@ public class MyPage extends Activity {
             profile_et_mypage_pw.setText(mypage.get(0).getPassword());
             profile_et_mypage_name.setText(mypage.get(0).getMyname());
 
-            if(mypage.get(0).getPhone().equals("non")) {
+            if(mypage.get(0).getPhone().equals("none")) {
                 profile_et_mypage_phone.setText("전화번호 정보가 없습니다.");
             }else {
                 profile_et_mypage_phone.setText(mypage.get(0).getPhone());
             }
-            if(mypage.get(0).getAccount_name().equals("non")) {
+            if(mypage.get(0).getAccount_name().equals("none")) {
                 profile_tv_mypage_account.setText("계좌 정보가 없습니다.");
             }else {
                 profile_tv_mypage_account.setText(mypage.get(0).getAccount_name() + " (" + mypage.get(0).getAccount_bank() + " " + mypage.get(0).getAccount_number() + ")");
@@ -180,20 +181,29 @@ public class MyPage extends Activity {
                     phone = profile_et_mypage_phone.getText().toString();
 
                     if(phone.length() == 0) {
-                        urlAddr = macIP + "jsp/profile_mypage_phone.jsp?loginEmail=" + loginEmail + "&phone=non";
+                        urlAddr = macIP + "jsp/profile_mypage_phone.jsp?loginEmail=" + loginEmail + "&phone=none";
+
+                        result = connectUpdateData();
+                        if(result.equals("1")) {
+                            Toast.makeText(MyPage.this, "전화번호가 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                            onResume();
+                        }else {
+                            Toast.makeText(MyPage.this, "전화번호 수정 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }else if(phone.length() == 11) {
-                        urlAddr = macIP + "profile_mypage_phone.jsp?loginEmail=" + loginEmail + "&phone=" + phone;
+                        urlAddr = macIP + "jsp/profile_mypage_phone.jsp?loginEmail=" + loginEmail + "&phone=" + phone;
+
+                        result = connectUpdateData();
+                        if(result.equals("1")) {
+                            Toast.makeText(MyPage.this, "전화번호가 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                            onResume();
+                        }else {
+                            Toast.makeText(MyPage.this, "전화번호 수정 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }else {
                         Toast.makeText(MyPage.this, "전화번호를 모두 입력해주세요..", Toast.LENGTH_SHORT).show();
                     }
 
-                    result = connectUpdateData();
-                    if(result.equals("1")) {
-                        onResume();
-                        Toast.makeText(MyPage.this, "전화번호가 수정되었습니다.", Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(MyPage.this, "전화번호 수정 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                    }
                     break;
             }
         }
@@ -202,24 +212,40 @@ public class MyPage extends Activity {
     View.OnFocusChangeListener onFocusListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
+
+            phone = profile_et_mypage_phone.getText().toString();
+
             switch(v.getId()) {
                 case R.id.profile_et_mypage_pw:
+
+                    if(phone.length() == 0) {
+                        profile_et_mypage_phone.setText("전화번호 정보가 없습니다.");
+                    }
+
                     profile_tv_mypage_pw_save.setVisibility(View.VISIBLE);
                     profile_tv_mypage_name_save.setVisibility(View.INVISIBLE);
                     profile_tv_mypage_phone_save.setVisibility(View.INVISIBLE);
 
-                    ViewGroup.LayoutParams params = profile_layout_mypage_pw_chk.getLayoutParams();
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    profile_layout_mypage_pw_chk.setLayoutParams(params);
+                    profile_layout_mypage_pw_chk.setVisibility(View.VISIBLE);
 
                     break;
                 case R.id.profile_et_mypage_name:
+
+                    if(phone.length() == 0) {
+                        profile_et_mypage_phone.setText("전화번호 정보가 없습니다.");
+                    }
+
                     profile_tv_mypage_name_save.setVisibility(View.VISIBLE);
                     profile_tv_mypage_phone_save.setVisibility(View.INVISIBLE);
                     profile_tv_mypage_pw_save.setVisibility(View.INVISIBLE);
                     profile_layout_mypage_pw_chk.setVisibility(View.GONE);
                     break;
                 case R.id.profile_et_mypage_phone:
+
+                    if(phone.equals("전화번호 정보가 없습니다.")) {
+                        profile_et_mypage_phone.setText("");
+                    }
+
                     profile_tv_mypage_phone_save.setVisibility(View.VISIBLE);
                     profile_tv_mypage_pw_save.setVisibility(View.INVISIBLE);
                     profile_tv_mypage_name_save.setVisibility(View.INVISIBLE);
