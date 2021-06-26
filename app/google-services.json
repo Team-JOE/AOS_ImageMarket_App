@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "172358253431",
+    "project_id": "imagemarket-1c045",
+    "storage_bucket": "imagemarket-1c045.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172358253431:android:308053c9bda73d5eb63f72",
+        "android_client_info": {
+          "package_name": "com.aosproject.imagemarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172358253431-3rl4m2ea94mhi8n6u3khuceah1ca98j9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aosproject.imagemarket",
+            "certificate_hash": "dcd561da4f0eb587cf4ab388120cf3192f5e720a"
+          }
+        },
+        {
+          "client_id": "172358253431-4u2o1bk9dknno561kqcrkl8o9vk267sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk-jUeVH0Z0bu14FcVcqIiklyl14AanZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172358253431-4u2o1bk9dknno561kqcrkl8o9vk267sc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

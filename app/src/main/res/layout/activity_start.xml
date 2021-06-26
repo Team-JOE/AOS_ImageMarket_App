@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.StartActivity"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
+        ></LinearLayout>
+
+    <LinearLayout
+        android:layout_marginHorizontal="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image Market에 오신걸 환영합니다."
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginVertical="20dp"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="로그인 후 이용 가능합니다."
+            >
+        </TextView>
+
+    <Button
+        android:layout_marginVertical="4dp"
+        android:id="@+id/button_sign_up_dy"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        style="?attr/materialButtonOutlinedStyle"
+        android:text="회원가입"
+        android:textStyle="bold"
+        >
+    </Button>
+
+    <Button
+        android:layout_marginVertical="4dp"
+        android:id="@+id/button_sign_in_dy"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="로그인"
+        >
+    </Button>
+
+    <TextView
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="계속 진행하면 Image Market 서비스 약관 및 개인정보 정책에 동의한 것으로 간주됩니다."
+        >
+    </TextView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="입금될 계좌를 려주세요."
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal">
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_text_set_owner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="예금주를 입력하세요"
+        android:maxLength="45"
+        android:inputType="text"
+        >
+    </EditText>
+    <EditText
+        android:id="@+id/edit_text_set_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="계좌번호를 입력하세요"
+        android:maxLength="45"
+        android:inputType="number"
+        >
+    </EditText>
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="100"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="180dp"
+        >
+    </ProgressBar>
+
+    <Button
+        android:id="@+id/button_complete_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:text="건너뛰기"
+        >
+    </Button>
+
+</LinearLayout>

@@ -6,7 +6,7 @@
         android:enabled="true"
         android:checked="true"
         android:icon="@drawable/ic_baseline_photo_library_24"
-        android:title=""
+        android:title="Home"
         />
 
     <item
@@ -14,7 +14,7 @@
         android:enabled="true"
         android:checked="true"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title=""
+        android:title="Search"
         />
 
     <item
@@ -22,7 +22,7 @@
         android:enabled="true"
         android:checked="true"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title=""
+        android:title="Cart"
         />
 
     <item
@@ -30,7 +30,7 @@
         android:enabled="true"
         android:checked="true"
         android:icon="@drawable/ic_baseline_account_circle_24"
-        android:title=""
+        android:title="Profile"
         />
 
 </menu>
