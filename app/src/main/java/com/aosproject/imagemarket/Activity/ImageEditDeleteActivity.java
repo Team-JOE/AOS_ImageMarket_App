@@ -70,12 +70,16 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        
+        Log.v("Chk", "ImageEditDeleteActivity_onCreate");
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.v("Chk", "ImageEditDeleteActivity_onResume");
+        
         Intent intent = getIntent();
         code = intent.getIntExtra("code", 0);
 

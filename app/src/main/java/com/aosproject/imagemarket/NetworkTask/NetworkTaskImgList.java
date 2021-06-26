@@ -109,13 +109,9 @@ public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
 
     private void parserBuyList(String str) {
         try {
-            Log.v("Chk", "NetWork_parserBuyList_start");
             JSONObject jsonObject = new JSONObject(str);
-            Log.v("Chk", "NetWork_parserBuyList_JSONObject");
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("profile_buylist"));
-            Log.v("Chk", "NetWork_parserBuyList_JSONArray");
+            JSONArray jsonArray = new JSONArray(jsonObject.getString("profile_imglist"));
             imglist.clear();
-            Log.v("Chk", "NetWork_parserBuyList_clear");
 
             for(int i=0; i<jsonArray.length(); i++) {
                 JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
@@ -128,7 +124,7 @@ public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
                 ImgListBean img = new ImgListBean(imageCode, filepath, title, price, sellCount);
                 imglist.add(img);
             }
-            Log.v("Chk", "NetWork_doInBackground_parserBuyList selllist : " + imglist);
+            Log.v("Chk", "NetWork_doInBackground_parserBuyList imglist : " + imglist);
 
         }catch(Exception e) {
             e.printStackTrace();
