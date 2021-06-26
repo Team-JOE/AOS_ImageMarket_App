@@ -1,11 +1,14 @@
 package com.aosproject.imagemarket.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -22,12 +25,21 @@ import static com.aosproject.imagemarket.R.id.item_fragment3;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int fromImageDetailViewToCartPage;
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        Intent intent = getIntent();
+        fromImageDetailViewToCartPage = intent.getIntExtra("cart", 0);
+
+
         bottomNavigationView = findViewById(R.id.tabar_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -36,8 +48,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+//        bottomNavigationView.setSelectedItemId(R.id.item_fragment1);
+
+        if(fromImageDetailViewToCartPage == 3){
+            bottomNavigationView.setSelectedItemId(R.id.item_fragment3);
+        }else{
+            bottomNavigationView.setSelectedItemId(R.id.item_fragment1);
+        }
 
     }
+
 
     private void BottomNavigate(int id) {
         String tag = String.valueOf(id);
