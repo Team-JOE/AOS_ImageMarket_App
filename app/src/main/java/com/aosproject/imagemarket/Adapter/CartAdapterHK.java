@@ -118,6 +118,7 @@ public class CartAdapterHK extends RecyclerView.Adapter<CartAdapterHK.ViewHolder
                 int position = holder.getAdapterPosition();
                 Intent intent = new Intent(context, ImageDetailActivity.class);
                 intent.putExtra("code", cartItems.get(position).getImageCode());
+                context.startActivity(intent);
             }
         });
 //        holder.ivImageFile.setOnTouchListener(new View.OnTouchListener() {

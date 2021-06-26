@@ -149,13 +149,13 @@ public class BuyListAdapter extends BaseAdapter {
         download.setTag(data.get(position).getDealNo());
         recommend.setTag(data.get(position).getRecommend());
 
-
+ 
 
         if(recommendInt == 1) {
-            recommend.setImageResource(R.drawable.ic_baseline_thumb_up_off_alt_24);
+            recommend.setImageResource(R.drawable.ic_baseline_thumb_up_alt_24);
             recommend.setColorFilter(Color.parseColor("#845EC2"));
         }else {
-            recommend.setImageResource(R.drawable.ic_baseline_thumb_up_alt_24);
+            recommend.setImageResource(R.drawable.ic_baseline_thumb_up_off_alt_24);
             recommend.setColorFilter(Color.parseColor("#845EC2"));
         }
 
@@ -302,6 +302,7 @@ public class BuyListAdapter extends BaseAdapter {
                     if(result.equals("1")){
                         Toast.makeText(mContext, downloadImageTitle + "가 이메일로 전송 되었습니다.", Toast.LENGTH_SHORT).show();
                         connectUpdateDownloadCount(downloadDealNo);
+                        clickListener.onBuyListClickListener(true);
                     }else{
                         Toast.makeText(mContext, "다운로드에 실패하였습니다. 관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
                     }
@@ -314,6 +315,7 @@ public class BuyListAdapter extends BaseAdapter {
                     if(result.equals("1")){
                         Toast.makeText(mContext, downloadImageTitle + "가 다운로드 되었습니다.", Toast.LENGTH_SHORT).show();
                         connectUpdateDownloadCount(downloadDealNo);
+                        clickListener.onBuyListClickListener(true);
                     }else{
                         Toast.makeText(mContext, "다운로드에 실패하였습니다. 관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show();
                     }
