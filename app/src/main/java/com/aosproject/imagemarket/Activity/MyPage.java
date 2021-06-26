@@ -105,7 +105,6 @@ public class MyPage extends Activity {
                 profile_tv_mypage_account.setText("계좌 정보가 없습니다.");
             }else {
                 profile_tv_mypage_account.setText(mypage.get(0).getAccount_name() + " (" + mypage.get(0).getAccount_bank() + " " + mypage.get(0).getAccount_number() + ")");
-
             }
 
         } catch (Exception e) {

@@ -79,7 +79,7 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
     protected void onResume() {
         super.onResume();
         Log.v("Chk", "ImageEditDeleteActivity_onResume");
-        
+
         Intent intent = getIntent();
         code = intent.getIntExtra("code", 0);
 
