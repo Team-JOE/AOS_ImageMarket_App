@@ -3,11 +3,7 @@ package com.aosproject.imagemarket.NetworkTask;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.aosproject.imagemarket.Bean.ImgListBean;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -15,24 +11,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
-public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
+public class NetworkTaskUserDelete extends AsyncTask<Integer, String, Object> {
 
     // Field
     Context context = null;
     String mAddr = null;
     ProgressDialog progressDialog = null;
-    ArrayList<ImgListBean> imglist;
-
-    String where = null;
 
     // Construct
-    public NetworkTaskImgList(Context context, String mAddr) {
+    public NetworkTaskUserDelete(Context context, String mAddr) {
         this.context = context;
         this.mAddr = mAddr;
-        this.imglist = imglist;
-        this.imglist = new ArrayList<ImgListBean>();
     }
 
     // progress 실행
@@ -62,8 +52,6 @@ public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
     @Override
     protected Object doInBackground(Integer... integers) {
 
-        Log.v("Chk", "NetWork doInBackground start");
-
         StringBuffer stringBuffer = new StringBuffer();
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
@@ -71,9 +59,7 @@ public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
         String result = null;
 
         try {
-            Log.v("Chk", "NetWork doInBackground start try");
             URL url = new URL(mAddr);
-            Log.v("Chk", "NetWork doInBackground  mAddr : " + mAddr);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(10000);
 
@@ -88,9 +74,7 @@ public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
                     stringBuffer.append(strline + "\n");
                 }
 
-                Log.v("Chk", "NetWork_doInBackground_parserBuyList_start stringBuffer : " + stringBuffer.toString());
-                parserBuyList(stringBuffer.toString());
-                Log.v("Chk", "NetWork_doInBackground_parserBuyList_end");
+                result = parserAction(stringBuffer.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,30 +88,17 @@ public class NetworkTaskImgList extends AsyncTask<Integer, String, Object> {
             }
         }
 
-        return imglist;
+        return result;
     }
 
-    private void parserBuyList(String str) {
+    private String parserAction(String str) {
+        String returnValue = null;
         try {
             JSONObject jsonObject = new JSONObject(str);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString("profile_imglist"));
-            imglist.clear();
-
-            for(int i=0; i<jsonArray.length(); i++) {
-                JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                int imageCode = jsonObject1.getInt("imageCode");
-                String filepath = jsonObject1.getString("filepath");
-                String title = jsonObject1.getString("title");
-                String price = jsonObject1.getString("price");
-                String sellCount = jsonObject1.getString("sellCount");
-
-                ImgListBean img = new ImgListBean(imageCode, filepath, title, price, sellCount);
-                imglist.add(img);
-            }
-            Log.v("Chk", "NetWork_doInBackground_parserBuyList imglist : " + imglist);
-
+            returnValue = jsonObject.getString("result");
         }catch(Exception e) {
             e.printStackTrace();
         }
+        return  returnValue;
     }
 }

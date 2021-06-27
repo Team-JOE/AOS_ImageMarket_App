@@ -100,8 +100,11 @@ public class ImgList extends Activity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             // 혜지언니 판매 상품 상세 페이지
+            Log.v("Chk", "ImgList_onItemClickListener start");
             Intent intent = new Intent(ImgList.this, ImageEditDeleteActivity.class);
+            intent.putExtra("code", imglist.get(position).getImageCode());
             startActivity(intent);
+            Log.v("Chk", "ImgList_onItemClickListener end");
         }
     };
 }
