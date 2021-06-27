@@ -1,6 +1,8 @@
 package com.aosproject.imagemarket.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.aosproject.imagemarket.Activity.SellReport;
 import com.aosproject.imagemarket.Activity.UserDelete;
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskProfileMain;
 import com.aosproject.imagemarket.R;
+import com.aosproject.imagemarket.Util.ShareVar;
 
 import static com.aosproject.imagemarket.Util.ShareVar.loginEmail;
 import static com.aosproject.imagemarket.Util.ShareVar.macIP;
@@ -33,6 +36,7 @@ public class ProfileFragment extends Fragment {
     TextView profile_tv_name, profile_tv_buy_num, profile_tv_sell_num, profile_tv_like_num, profile_tv_img_list, profile_tv_img_add, profile_tv_sell_report, profile_tv_logout, profile_tv_user_delete;
     String name, buy, sell, recommend;
 //    String urlAddr;
+    SharedPreferences auto = null;
 
     @Nullable
     @Override
@@ -139,6 +143,10 @@ public class ProfileFragment extends Fragment {
                     break;
                 case R.id.profile_tv_logout:
                     // 로그아웃
+                    auto = getActivity().getSharedPreferences("signInState", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = auto.edit();
+                    editor.putString("emailId", loginEmail);
+                    editor.commit();
                     break;
                 case R.id.profile_tv_user_delete:
                     intent = new Intent(getActivity(), UserDelete.class);

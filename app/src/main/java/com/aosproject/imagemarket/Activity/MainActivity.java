@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.aosproject.imagemarket.Fragment.CartFragment;
 import com.aosproject.imagemarket.Fragment.HomeFragment;
@@ -92,5 +93,24 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNow();
 
+    }
+
+    private long pressedTime;
+    @Override
+    public void onBackPressed() {
+
+        if(pressedTime == 0) {
+            Toast.makeText(MainActivity.this,"한번 더 누르면 종료됩니다.", Toast.LENGTH_LONG).show();
+            pressedTime = System.currentTimeMillis();
+        } else {
+            int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+            if(seconds > 2000) {
+                pressedTime = 0;
+            } else {
+                finish();
+            }
+        }
+        finish();
     }
 }

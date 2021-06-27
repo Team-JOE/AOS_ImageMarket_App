@@ -124,9 +124,9 @@ public class SignInActivity extends AppCompatActivity {
                     //Set Share email
                     ShareVar.loginEmail = email;
                     //Set Share preferences
-//                    SharedPreferences.Editor editor = auto.edit();
-//                    editor.putString("emailId", email);
-//                    editor.commit();
+                    SharedPreferences.Editor editor = auto.edit();
+                    editor.putString("emailId", email);
+                    editor.commit();
                     // Intent
                     Intent intent = null;
                     intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -291,9 +291,9 @@ public class SignInActivity extends AppCompatActivity {
                             Log.e("Google", urlAddr);
                             if(result.equals("exist")) {
                                 //Set Share preferences
-//                                SharedPreferences.Editor editor = auto.edit();
-//                                editor.putString("emailId", email);
-//                                editor.commit();
+                                SharedPreferences.Editor editor = auto.edit();
+                                editor.putString("emailId", email);
+                                editor.commit();
 
                                 Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                                 startActivity(intent);
@@ -309,9 +309,9 @@ public class SignInActivity extends AppCompatActivity {
                                 result = connectSignInData();
                                 if(result.equals("1")){
                                     //Set Share preferences
-//                                SharedPreferences.Editor editor = auto.edit();
-//                                editor.putString("emailId", email);
-//                                editor.commit();
+                                SharedPreferences.Editor editor = auto.edit();
+                                editor.putString("emailId", email);
+                                editor.commit();
                                     //Intent
                                     Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                                     startActivity(intent);
@@ -345,9 +345,9 @@ public class SignInActivity extends AppCompatActivity {
                     Log.e("result", result);
                     if(result.equals("exist")) {
                         //Set Share preferences
-//                                SharedPreferences.Editor editor = auto.edit();
-//                                editor.putString("emailId", email);
-//                                editor.commit();
+                                SharedPreferences.Editor editor = auto.edit();
+                                editor.putString("emailId", kakaoEmail);
+                                editor.commit();
                         Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                         startActivity(intent);
 
@@ -358,6 +358,10 @@ public class SignInActivity extends AppCompatActivity {
                         result = connectSignInData();
                         if(result.equals("1")){
                             //Intent
+                            SharedPreferences.Editor editor = auto.edit();
+                            editor.putString("emailId", kakaoEmail);
+                            editor.commit();
+
                             Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                             startActivity(intent);
 
