@@ -21,7 +21,10 @@
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <FrameLayout
         android:layout_marginHorizontal="4dp"
         android:id="@+id/layout_show_photo"
@@ -148,7 +151,8 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop">
         </ImageView>
-    </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 <!--    <GridView-->
