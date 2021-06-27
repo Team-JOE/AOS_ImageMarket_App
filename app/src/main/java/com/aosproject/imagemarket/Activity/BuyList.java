@@ -3,6 +3,7 @@ package com.aosproject.imagemarket.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -91,6 +92,9 @@ public class BuyList extends Activity implements BuyListClickListener {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.profile_iv_buylist_back:
+                    Intent intent = new Intent(BuyList.this, MainActivity.class);
+                    intent.putExtra("imgList", 4);
+                    startActivity(intent);
                     finish();
                     break;
             }
