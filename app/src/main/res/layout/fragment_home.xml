@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -14,12 +13,13 @@
         android:id="@+id/main_img_banner"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:src="@drawable/logo"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="720dp"
         android:layout_marginTop="120dp"
         tools:listitem="@layout/main_custom_layout"
         />

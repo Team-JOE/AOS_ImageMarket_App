@@ -52,7 +52,7 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
     ArrayList<ImageHJ> images = null;
     ArrayList<DealHJ> deals = null;
     TextView editDeleteImageName, editDeleteRecommend, editDeleteImagePrice, editDeleteImageFormat, editDeleteImageDetail, editDeleteImageCategory, editDeleteImageLocation, editDeleteImageSeller;
-    ImageView imageView, back = null;
+    ImageView imageView, back, noImage = null;
     Chip c0, c1, c2, c3, c4, c5, c6, c7, c8 = null;
     Button editBtn, deleteBtn, editSliderBtn, deleteSliderBtn = null;
     RecyclerView recyclerView = null;
@@ -92,7 +92,7 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        noImage = findViewById(R.id.edit_delete_no_image);
         editDeleteImageName = findViewById(R.id.edit_delete_textview_name);
         editDeleteRecommend = findViewById(R.id.edit_delete_textview_recommend);
         editDeleteImagePrice = findViewById(R.id.edit_delete_textview_price);
@@ -191,15 +191,17 @@ public class ImageEditDeleteActivity extends AppCompatActivity implements OnMapR
             NetworkTaskImageHJ networkTask = new NetworkTaskImageHJ(ImageEditDeleteActivity.this, urlAddr3, "imageSelect");
             Object obj = networkTask.execute().get();
             images = (ArrayList<ImageHJ>) obj;
-            filepath = images.get(0).getFilepath();
-            Log.v("Message", images.get(0).getFilepath() + "log");
-
-            adapter = new ImageEditAdapterHJ(ImageEditDeleteActivity.this, R.layout.edit_delete_custom_layout, images);
-            recyclerView.setAdapter(adapter);
-
-            MyListDecoration decoration = new MyListDecoration();
-            recyclerView.addItemDecoration(decoration);
-
+            if(images.size()==0){
+                noImage.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }else {
+                filepath = images.get(0).getFilepath();
+                Log.v("Message", images.get(0).getFilepath() + "log");
+                adapter = new ImageEditAdapterHJ(ImageEditDeleteActivity.this, R.layout.edit_delete_custom_layout, images);
+                recyclerView.setAdapter(adapter);
+                MyListDecoration decoration = new MyListDecoration();
+                recyclerView.addItemDecoration(decoration);
+            }
         }catch (Exception e){
             Log.v("Message", "error");
             e.printStackTrace();

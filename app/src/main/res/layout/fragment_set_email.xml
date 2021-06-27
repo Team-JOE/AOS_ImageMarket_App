@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="아이디로 사용할\n이메일을 알려주세요."
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal">
+    </TextView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_set_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/white"
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_set_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일을 입력하세요"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:maxLength="100"
+            android:inputType="textEmailAddress"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:max="100"
+        android:progress="20"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="120dp"
+        >
+    </ProgressBar>
+    <Button
+        android:id="@+id/button_go_set_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:text="다음"
+        android:enabled="false"
+        ></Button>
+</LinearLayout>

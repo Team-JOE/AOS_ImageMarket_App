@@ -77,150 +77,157 @@ public class ImageAddLocationActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
             String[] parserData = editText.getText().toString().split(",");
             urlAddr = ShareVar.macIP + "jsp/";
-
             switch (v.getId()){
                 case R.id.add_location_btn_next:
-
-                    urlAddr4 = ShareVar.macIP + "jsp/multipartRequest.jsp";
-                    Log.v("Message", urlAddr4);
-                    NetworkTaskAddImageHJ networkTask = new NetworkTaskAddImageHJ(ImageAddLocationActivity.this, urlAddr4, img_path);
-                    try {
-                        Integer result = (Integer) networkTask.execute(100).get();
-                        switch (result) {
-                            case 1:
-                                File file = new File(img_path);
-                                file.delete();
-                                new AlertDialog.Builder(ImageAddLocationActivity.this)
-                                        .setMessage("이미지 판매 등록을 완료하시겠습니까?")
-                                        .setCancelable(false)
-                                        .setNegativeButton("Cancel", null)
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = null;
-
-                                                if(editText.getText().toString().isEmpty()){
-                                                    urlAddr = urlAddr + "imageInsert2.jsp?filepath=" + filepath + "&title=" + title + "&detail=" + detail + "&fileformat=" + fileformat
-                                                            + "&category=" + category + "&tag=" + tag + "&price=" + price;
-                                                    Log.v("Message", "나와라!!!" + urlAddr);
-
-                                                    String result = connectInsertData();
-
-                                                    if (result.equals("1")){
-                                                        try {
-                                                            urlAddr3 = ShareVar.macIP + "jsp/imageSelect.jsp";
-                                                            Log.v("Message", urlAddr3);
-                                                            NetworkTaskImageHJ networkTask = new NetworkTaskImageHJ(ImageAddLocationActivity.this, urlAddr3, "insertSelect");
-                                                            Object obj = networkTask.execute().get();
-                                                            images = (ArrayList<ImageHJ>) obj;
-                                                            image_code = images.get(0).getCode();
-                                                            Log.v("Message", "code : " + Integer.toString(image_code));
-                                                            urlAddr2 = ShareVar.macIP + "jsp/imageInsert3.jsp?";
-                                                            urlAddr2 = urlAddr2 + "user_email=" + ShareVar.loginEmail + "&image_code=" + image_code;
-                                                            Log.v("Message", urlAddr2);
-                                                            String result2 = connectInsertData2();
-                                                            Log.v("Message", "제발!!!" + result2);
-                                                            if (result2.equals("1")){
-                                                                Log.v("Message", "한 번 더!!!" + result2);
-                                                                new AlertDialog.Builder(ImageAddLocationActivity.this)
-                                                                        .setMessage("이미지 등록이 완료되었습니다!")
-                                                                        .setCancelable(false)
-                                                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                                            @Override
-                                                                            public void onClick(DialogInterface dialog, int which) {
+                    new AlertDialog.Builder(ImageAddLocationActivity.this)
+                            .setMessage("이미지 판매 등록을 완료하시겠습니까?")
+                            .setCancelable(false)
+                            .setNegativeButton("Cancel", null)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = null;
+                                    if(editText.getText().toString().isEmpty()){
+                                        urlAddr = urlAddr + "imageInsert2.jsp?filepath=" + filepath + "&title=" + title + "&detail=" + detail + "&fileformat=" + fileformat
+                                                + "&category=" + category + "&tag=" + tag + "&price=" + price;
+                                        Log.v("Message", "나와라!!!" + urlAddr);
+                                        String result = connectInsertData();
+                                        if (result.equals("1")){
+                                            try {
+                                                urlAddr3 = ShareVar.macIP + "jsp/imageSelect.jsp";
+                                                Log.v("Message", urlAddr3);
+                                                NetworkTaskImageHJ networkTask = new NetworkTaskImageHJ(ImageAddLocationActivity.this, urlAddr3, "insertSelect");
+                                                Object obj = networkTask.execute().get();
+                                                images = (ArrayList<ImageHJ>) obj;
+                                                image_code = images.get(0).getCode();
+                                                Log.v("Message", "code : " + Integer.toString(image_code));
+                                                urlAddr2 = ShareVar.macIP + "jsp/imageInsert3.jsp?";
+                                                urlAddr2 = urlAddr2 + "user_email=" + ShareVar.loginEmail + "&image_code=" + image_code;
+                                                Log.v("Message", urlAddr2);
+                                                String result2 = connectInsertData2();
+                                                Log.v("Message", "제발!!!" + result2);
+                                                if (result2.equals("1")){
+                                                    Log.v("Message", "한 번 더!!!" + result2);
+                                                    new AlertDialog.Builder(ImageAddLocationActivity.this)
+                                                            .setMessage("이미지 등록이 완료되었습니다!")
+                                                            .setCancelable(false)
+                                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                    urlAddr4 = ShareVar.macIP + "jsp/multipartRequest.jsp";
+                                                                    Log.v("Message", urlAddr4);
+                                                                    NetworkTaskAddImageHJ networkTask = new NetworkTaskAddImageHJ(ImageAddLocationActivity.this, urlAddr4, img_path);
+                                                                    try {
+                                                                        Integer result = (Integer) networkTask.execute(100).get();
+                                                                        switch (result) {
+                                                                            case 1:
+                                                                                File file = new File(img_path);
+                                                                                file.delete();
                                                                                 Intent intent = new Intent(ImageAddLocationActivity.this, ImageEditDeleteActivity.class);
                                                                                 intent.putExtra("code", image_code);
                                                                                 startActivity(intent);
-                                                                            }
-                                                                        })
-                                                                        .show();
-                                                            }else {
-                                                                Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }catch (Exception e){
-
-                                                        }
-                                                    }else {
-                                                        Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
-                                                    }
+                                                                                break;
+                                                                            case 0:
+                                                                                Toast.makeText(ImageAddLocationActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                                                                break;
+                                                                        }
+                                                                    } catch (Exception e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+                                                            })
+                                                            .show();
                                                 }else {
-                                                    try {
-                                                        Geocoder g = new Geocoder(ImageAddLocationActivity.this);
-
-                                                        address = g.getFromLocationName(editText.getText().toString(), 1);
-                                                        double mLat = address.get(0).getLatitude();
-                                                        double mLng = address.get(0).getLongitude();
-                                                        String lat = Double.toString(mLat);
-                                                        String lng = Double.toString(mLng);
-                                                        Log.v("Message", "위도랑 경도!!" + mLat);
-                                                        Log.v("Message", "위도랑 경도!!" + mLng);
-                                                        urlAddr = urlAddr + "imageInsert.jsp?filepath=" + filepath + "&title=" + title + "&detail=" + detail + "&fileformat=" + fileformat
-                                                                + "&category=" + category + "&tag=" + tag + "&price=" + price + "&location=" + editText.getText().toString()
-                                                                + "&latitude=" + lat + "&longitude=" + lng;
-                                                        Log.v("Message", urlAddr);
-                                                        String result = connectInsertData();
-                                                        if (result.equals("1")){
-                                                            try {
-                                                                urlAddr3 = ShareVar.macIP + "jsp/imageSelect.jsp";
-                                                                Log.v("Message", urlAddr3);
-                                                                NetworkTaskImageHJ networkTask = new NetworkTaskImageHJ(ImageAddLocationActivity.this, urlAddr3, "insertSelect");
-                                                                Object obj = networkTask.execute().get();
-                                                                images = (ArrayList<ImageHJ>) obj;
-                                                                image_code = images.get(0).getCode();
-                                                                Log.v("Message", "code : " + Integer.toString(image_code));
-                                                                urlAddr2 = ShareVar.macIP + "jsp/imageInsert3.jsp?";
-                                                                urlAddr2 = urlAddr2 + "user_email=" + ShareVar.loginEmail + "&image_code=" + image_code;
-                                                                Log.v("Message", urlAddr2);
-                                                                String result2 = connectInsertData2();
-                                                                Log.v("Message", "제발!!!" + result2);
-                                                                if (result2.equals("1")){
-                                                                    Log.v("Message", "한 번 더!!!" + result2);
-                                                                    new AlertDialog.Builder(ImageAddLocationActivity.this)
-                                                                            .setMessage("이미지 등록이 완료되었습니다!")
-                                                                            .setCancelable(false)
-                                                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                                                @Override
-                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }catch (Exception e){
+                                            }
+                                        }else {
+                                            Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else {
+                                        try {
+                                            Geocoder g = new Geocoder(ImageAddLocationActivity.this);
+                                            address = g.getFromLocationName(editText.getText().toString(), 1);
+                                            double mLat = address.get(0).getLatitude();
+                                            double mLng = address.get(0).getLongitude();
+                                            String lat = Double.toString(mLat);
+                                            String lng = Double.toString(mLng);
+                                            Log.v("Message", "위도랑 경도!!" + mLat);
+                                            Log.v("Message", "위도랑 경도!!" + mLng);
+                                            urlAddr = urlAddr + "imageInsert.jsp?filepath=" + filepath + "&title=" + title + "&detail=" + detail + "&fileformat=" + fileformat
+                                                    + "&category=" + category + "&tag=" + tag + "&price=" + price + "&location=" + editText.getText().toString()
+                                                    + "&latitude=" + lat + "&longitude=" + lng;
+                                            Log.v("Message", urlAddr);
+                                            String result = connectInsertData();
+                                            if (result.equals("1")){
+                                                try {
+                                                    urlAddr3 = ShareVar.macIP + "jsp/imageSelect.jsp";
+                                                    Log.v("Message", urlAddr3);
+                                                    NetworkTaskImageHJ networkTask = new NetworkTaskImageHJ(ImageAddLocationActivity.this, urlAddr3, "insertSelect");
+                                                    Object obj = networkTask.execute().get();
+                                                    images = (ArrayList<ImageHJ>) obj;
+                                                    image_code = images.get(0).getCode();
+                                                    Log.v("Message", "code : " + Integer.toString(image_code));
+                                                    urlAddr2 = ShareVar.macIP + "jsp/imageInsert3.jsp?";
+                                                    urlAddr2 = urlAddr2 + "user_email=" + ShareVar.loginEmail + "&image_code=" + image_code;
+                                                    Log.v("Message", urlAddr2);
+                                                    String result2 = connectInsertData2();
+                                                    Log.v("Message", "제발!!!" + result2);
+                                                    if (result2.equals("1")){
+                                                        Log.v("Message", "한 번 더!!!" + result2);
+                                                        new AlertDialog.Builder(ImageAddLocationActivity.this)
+                                                                .setMessage("이미지 등록이 완료되었습니다!")
+                                                                .setCancelable(false)
+                                                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        urlAddr4 = ShareVar.macIP + "jsp/multipartRequest.jsp";
+                                                                        Log.v("Message", urlAddr4);
+                                                                        NetworkTaskAddImageHJ networkTask = new NetworkTaskAddImageHJ(ImageAddLocationActivity.this, urlAddr4, img_path);
+                                                                        try {
+                                                                            Integer result = (Integer) networkTask.execute(100).get();
+                                                                            switch (result) {
+                                                                                case 1:
+                                                                                    File file = new File(img_path);
+                                                                                    file.delete();
                                                                                     Intent intent = new Intent(ImageAddLocationActivity.this, ImageEditDeleteActivity.class);
                                                                                     intent.putExtra("code", image_code);
                                                                                     startActivity(intent);
-                                                                                }
-                                                                            })
-                                                                            .show();
-                                                                }else {
-                                                                    Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            }catch (Exception e){
-
-                                                            }
-                                                        }else {
-                                                            Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }catch (Exception e){
-                                                        e.printStackTrace();
-                                                        Toast.makeText(ImageAddLocationActivity.this, "올바르지 않은 주소 정보입니다", Toast.LENGTH_SHORT).show();
+                                                                                    break;
+                                                                                case 0:
+                                                                                    Toast.makeText(ImageAddLocationActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                                                                    break;
+                                                                            }
+                                                                        } catch (Exception e) {
+                                                                            e.printStackTrace();
+                                                                        }
+                                                                    }
+                                                                })
+                                                                .show();
+                                                    }else {
+                                                        Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
                                                     }
+                                                }catch (Exception e){
                                                 }
+                                            }else {
+                                                Toast.makeText(ImageAddLocationActivity.this, "입력이 실패 되었습니다", Toast.LENGTH_SHORT).show();
                                             }
-                                        })
-                                        .show();
-                                break;
-                            case 0:
-                                Toast.makeText(ImageAddLocationActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                            Toast.makeText(ImageAddLocationActivity.this, "올바르지 않은 주소 정보입니다", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            })
+                            .show();
                     break;
                 case R.id.add_location_ivbtn_back:
                     finish();
                     break;
             }
-
         }
     };
 

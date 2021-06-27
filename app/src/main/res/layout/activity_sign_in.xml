@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SignInActivity"
+    android:orientation="vertical"
+    >
+
+    <!--상단바-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="로그인"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            />
+        <ImageView
+            android:id="@+id/back_image_in_signin"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="30dp"
+            app:tint="@color/black"
+            />
+    </FrameLayout>
+    <!--밑줄 선-->
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A8A8A8"
+        />
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_text_sign_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@android:color/white"
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_sign_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일을 입력하세요"
+            android:maxLength="100"
+            android:textSize="24dp"
+            android:inputType="textEmailAddress"
+            android:textStyle="bold"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_text_sign_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_sign_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호를 입력하세요"
+            android:inputType="textPassword"
+            android:maxLength="45"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    
+    <Button
+        android:id="@+id/button_do_sign_in"
+        android:text="로그인"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:enabled="false"
+        android:textStyle="bold"
+    ></Button>
+
+    <TextView
+        android:id="@+id/text_find_password"
+        android:layout_marginVertical="20dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="비밀번호를 잊으셨나요?"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        >
+    </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+    <TextView
+        android:layout_marginVertical="20dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="또는"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        ></TextView>
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_marginVertical="8dp"
+        android:id="@+id/button_sign_in_by_google"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        />
+<!--    <Button-->
+<!--        android:id="@+id/button_sign_in_by_google"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="#4385F0"-->
+<!--        android:text="구글 로그인"-->
+<!--        >-->
+<!--    </Button>-->
+    <Button
+        android:layout_marginVertical="8dp"
+        android:id="@+id/button_sign_in_by_naver"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:backgroundTint="#03C75A"
+        android:text="네이버로 시작하기"
+        >
+    </Button>
+
+
+    <Button
+        android:layout_marginVertical="8dp"
+        android:id="@+id/button_sign_in_by_kakao"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:backgroundTint="#F5E132"
+        android:text="카카오 로그인"
+        android:textColor="@color/black"
+        >
+    </Button>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

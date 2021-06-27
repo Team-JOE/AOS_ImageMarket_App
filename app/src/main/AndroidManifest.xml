@@ -40,18 +40,36 @@
         <activity android:name=".Activity.DealItemActivityHK" />
         <activity android:name=".Activity.DealCompeletedActivityHK" />
         <activity android:name=".Activity.DealCartItemActivityHK" />
-
+        <activity android:name=".Activity.FindPasswordActivity" />
+        <activity android:name=".Activity.SignUpActivity" />
+        <activity android:name=".Activity.SignInActivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.CategoryActivity"></activity>
+        <activity android:name=".Activity.SearchResultActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCqNC2pD8z__Vb3miH5P7sCENR3uWqcIIo" />
 
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+            <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+
+                    <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                    <data android:host="oauth"
+                        android:scheme="kakaof72a922b4ec45b6a0dd8bdc40124b8e6" />
+                </intent-filter>
+            </activity>
+
     </application>
 
 </manifest>
