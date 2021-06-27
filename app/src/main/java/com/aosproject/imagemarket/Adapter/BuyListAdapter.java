@@ -46,6 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.aosproject.imagemarket.Util.ShareVar.loginEmail;
 import static com.aosproject.imagemarket.Util.ShareVar.macIP;
 
 public class BuyListAdapter extends BaseAdapter {
@@ -343,7 +344,7 @@ public class BuyListAdapter extends BaseAdapter {
     // sending email
     private String connectEmailDownload(){
         String result = null;
-        String urlAddr = ShareVar.macIP + "jsp/deal_download_send_email.jsp?imageFilepath=" + downloadImageFilepath + "&imageTitle=" + downloadImageTitle + "&loginEmail=hyogangster1@gmail.com";
+        String urlAddr = ShareVar.macIP + "jsp/deal_download_send_email.jsp?imageFilepath=" + downloadImageFilepath + "&imageTitle=" + downloadImageTitle + "&loginEmail=" + loginEmail;
         try {
             DownloadEmailNetworkTaskHK networkTask = new DownloadEmailNetworkTaskHK(mContext, urlAddr);
             Object obj = networkTask.execute().get();
