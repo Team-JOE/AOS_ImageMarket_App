@@ -336,7 +336,7 @@ public class SignInActivity extends AppCompatActivity {
                     String result = null;
                     kakaoName = user.getKakaoAccount().getProfile().getNickname();
                     kakaoEmail = user.getKakaoAccount().getEmail();
-                    kakaoPhone = user.getKakaoAccount().getPhoneNumber();
+                    kakaoPhone = "none";
                     String pwd = "kakao";
 
                     urlAddr = ShareVar.macIP + "jsp/userEmailSelect.jsp?" + "email=" + kakaoEmail;

@@ -119,9 +119,6 @@ public class SetAccountFragment extends Fragment {
             String result = connectInsertData();
             if(result.equals("1")){
 
-                InputMethodManager immhide = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
                 Fragment fragment = new CompleteSignUpFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -131,6 +128,8 @@ public class SetAccountFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "입력실패.", Toast.LENGTH_SHORT).show();
             }
+            InputMethodManager immhide = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         }
     };
 
