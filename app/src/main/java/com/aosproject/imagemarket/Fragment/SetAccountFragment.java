@@ -107,9 +107,9 @@ public class SetAccountFragment extends Fragment {
             name = user.getName();
             phone = user.getPhoneNumber();
             if (ownerEditText.getText().toString().length()==0 || accountEditText.getText().toString().length()==0) {
-                bank = "'none'";
-                owner = "'none'";
-                account = "'none'";
+                bank = "none";
+                owner = "none";
+                account = "none";
             } else {
                 bank = "카카오뱅크";
                 owner = ownerEditText.getText().toString();
