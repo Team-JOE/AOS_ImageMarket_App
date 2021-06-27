@@ -99,6 +99,8 @@ public class SetAccountFragment extends Fragment {
     View.OnClickListener saveAll = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            InputMethodManager immhide = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
             //Insert user data
             UserModel user = new UserModel();
@@ -128,8 +130,6 @@ public class SetAccountFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "입력실패.", Toast.LENGTH_SHORT).show();
             }
-            InputMethodManager immhide = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-            immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         }
     };
 

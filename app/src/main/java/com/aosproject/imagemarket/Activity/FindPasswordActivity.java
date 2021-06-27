@@ -86,6 +86,7 @@ public class FindPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = editText.getText().toString();
                 urlAddr = urlAddr + "email=" + email + "&pwd=" + newPwd;
+                Log.e("Change PWD", urlAddr);
                 String result = connectInsertData();
                 if(result.equals("1")){
                     sendEmail();
