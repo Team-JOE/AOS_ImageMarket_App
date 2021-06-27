@@ -18,6 +18,13 @@
         android:gravity="center_horizontal">
     </TextView>
 
+    <Spinner
+        android:id="@+id/spinner_bank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ></Spinner>
+
     <EditText
         android:id="@+id/edit_text_set_owner"
         android:layout_width="match_parent"

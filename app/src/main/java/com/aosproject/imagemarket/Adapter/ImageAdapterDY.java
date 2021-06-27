@@ -1,6 +1,7 @@
 package com.aosproject.imagemarket.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aosproject.imagemarket.Activity.ImageDetailActivity;
 import com.aosproject.imagemarket.Bean.JsonImageDY;
 import com.aosproject.imagemarket.R;
 import com.aosproject.imagemarket.Util.ShareVar;
@@ -22,6 +24,7 @@ public class ImageAdapterDY extends RecyclerView.Adapter<ImageAdapterDY.ViewHold
     private Context context;
 
     private ArrayList<JsonImageDY> images = null;
+    private ImageAdapterHJ.OnItemClickListener mListener = null;
 
     public ImageAdapterDY(Context context, ArrayList<JsonImageDY> images) {
         this.context = context;
@@ -34,6 +37,18 @@ public class ImageAdapterDY extends RecyclerView.Adapter<ImageAdapterDY.ViewHold
         public ViewHolder(View itemView){
             super(itemView);
             img = itemView.findViewById(R.id.search_image_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        Intent intent = new Intent(context, ImageDetailActivity.class);
+                        intent.putExtra("code", images.get(pos).getImageCode());
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
     }
 
@@ -49,6 +64,7 @@ public class ImageAdapterDY extends RecyclerView.Adapter<ImageAdapterDY.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context)
                 .load(ShareVar.macIP + "image/" + images.get(position).getImageFilepath()).into(holder.img);
+
     }
 
     @Override

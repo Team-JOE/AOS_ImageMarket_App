@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.aosproject.imagemarket.Activity.ImageDetailActivity;
 import com.aosproject.imagemarket.Bean.JsonImageDY;
 import com.aosproject.imagemarket.R;
 import com.aosproject.imagemarket.Util.ShareVar;
@@ -62,10 +63,9 @@ public class PopularImageAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //디테일 뷰로 넘기기.
-//                Intent intent = new Intent(v.getContext(), .class);
-//                intent.putExtra("code", data.get(position).getImageCode());
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, ImageDetailActivity.class);
+                intent.putExtra("code", data.get(position).getImageCode());
+                context.startActivity(intent);
             }
         });
 

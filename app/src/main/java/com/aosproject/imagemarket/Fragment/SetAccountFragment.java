@@ -1,5 +1,6 @@
 package com.aosproject.imagemarket.Fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,8 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +33,8 @@ public class SetAccountFragment extends Fragment {
     String email, pwd, name, phone, bank, owner, account = null;
     EditText ownerEditText, accountEditText;
     Button doneButton;
+    Spinner spinner;
+    String[] items = {"카카오뱅크", "농협", "신한은행", "국민은행", "우리은행", "기업은행", "하나은행"};
 
     @Nullable
     @Override
@@ -36,7 +43,23 @@ public class SetAccountFragment extends Fragment {
         ownerEditText = view.findViewById(R.id.edit_text_set_owner);
         accountEditText = view.findViewById(R.id.edit_text_set_account);
         doneButton = view.findViewById(R.id.button_complete_sign_up);
+        spinner = view.findViewById(R.id.spinner_bank);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bank = items[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                bank = items[0];
+            }
+        });
         urlAddr = ShareVar.macIP + "/jsp/userInsertReturn.jsp?";
 
         doneButton.setOnClickListener(saveAll);
@@ -95,6 +118,10 @@ public class SetAccountFragment extends Fragment {
             urlAddr = urlAddr + "email=" + email + "&pwd=" + pwd +"&name=" + name + "&phone=" + phone + "&bank=" + bank + "&owner=" + owner + "&accountnum=" + account;
             String result = connectInsertData();
             if(result.equals("1")){
+
+                InputMethodManager immhide = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
                 Fragment fragment = new CompleteSignUpFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

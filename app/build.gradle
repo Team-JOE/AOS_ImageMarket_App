@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.aosproject.imagemarket"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -42,4 +42,23 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    //로티
+    implementation 'com.airbnb.android:lottie:3.0.7'
+
+    //구글 로그인
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+    //네이버 로그인
+//    implementation files('libs/naveridlogin_android_sdk_4.2.6.aar')
+//    def android_x_version = "1.3.0"
+//    implementation "androidx.legacy:legacy-support-core-utils:$android_x_version"
+//    implementation "androidx.browser:browser:$android_x_version"
+//    implementation "androidx.legacy:legacy-support-v4:$android_x_version"android_x_version
+
+    // 카카오 로그인
+   implementation "com.kakao.sdk:v2-user:2.5.2"
 }

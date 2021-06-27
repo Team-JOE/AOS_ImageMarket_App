@@ -99,6 +99,10 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 searchTextField.clearFocus();
+
+                InputMethodManager immhide = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
                 button.setVisibility(View.INVISIBLE);
                 textInputLayout.setPadding(16,16, 16,16);
                 fragmentTransaction = fragmentManager.beginTransaction();

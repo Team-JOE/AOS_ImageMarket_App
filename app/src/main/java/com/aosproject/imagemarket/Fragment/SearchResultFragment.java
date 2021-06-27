@@ -65,6 +65,7 @@ public class SearchResultFragment extends Fragment {
             } else {
                 adapter = new ImageAdapterDY(getContext(), images);
                 recyclerView.setAdapter(adapter);
+
             }
 
         } catch (Exception e) {

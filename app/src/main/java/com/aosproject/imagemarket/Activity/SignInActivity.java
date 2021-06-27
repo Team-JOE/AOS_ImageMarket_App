@@ -22,8 +22,12 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.nhn.android.naverlogin.OAuthLogin;
-import com.nhn.android.naverlogin.OAuthLoginHandler;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+//import com.nhn.android.naverlogin.OAuthLogin;
+//import com.nhn.android.naverlogin.OAuthLoginHandler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -40,13 +44,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
+
 public class SignInActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
-    Button signInButton, naverButton, kakaoButton;
-    TextInputLayout emailTextLayout, pwdTextLayout;
-    TextInputEditText emailEditText, pwdEditText;
-    TextView findPassword;
+    private Button signInButton, naverButton, kakaoButton;
+    private TextInputLayout emailTextLayout, pwdTextLayout;
+    private TextInputEditText emailEditText, pwdEditText;
+    private TextView findPassword;
     String urlAddr,email,pwd = null;
+    String kakaoName, kakaoEmail, kakaoPhone;
     SharedPreferences auto = null;
     //Google Sign In
     private SignInButton googleButton;
@@ -54,7 +62,7 @@ public class SignInActivity extends AppCompatActivity {
     FirebaseAuth auth;
 
     //Naver Sign In
-    OAuthLogin naverOAuthLogin;
+//    OAuthLogin naverOAuthLogin;
 
     Context mContext;
 
@@ -70,19 +78,22 @@ public class SignInActivity extends AppCompatActivity {
         //urlAddr = ShareVar.macIP + "/jsp/login.jsp?";
 
         // 네이버 로그인 set
-        naverOAuthLogin = OAuthLogin.getInstance();
-        naverOAuthLogin.init(mContext,
-                "aEj2hhhrs5o2JI3BNY3e",
-                "ZzMZ4LV1zg",
-                "Imjoy");
+//        naverOAuthLogin = OAuthLogin.getInstance();
+//        naverOAuthLogin.init(mContext,
+//                "aEj2hhhrs5o2JI3BNY3e",
+//                "ZzMZ4LV1zg",
+//                "Imjoy");
 
         //구글 로그인 set
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        auth = FirebaseAuth.getInstance();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        auth = FirebaseAuth.getInstance();
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        //카카오 로그인 set
+        KakaoSdk.init(this, "f72a922b4ec45b6a0dd8bdc40124b8e6");
 
         emailTextLayout = findViewById(R.id.layout_text_sign_email);
         pwdTextLayout = findViewById(R.id.layout_text_sign_password);
@@ -105,8 +116,9 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = emailEditText.getText().toString();
                 pwd = pwdEditText.getText().toString();
-                urlAddr = ShareVar.macIP + "/jsp/login.jsp?";
+                urlAddr = ShareVar.macIP + "jsp/login.jsp?";
                 urlAddr = urlAddr + "email=" + email + "&pwd=" + pwd;
+                Log.d("login",urlAddr);
                 String result = connectSignInData();
                 if (result.equals("succes")){
                     //Set Share email
@@ -207,24 +219,24 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            OAuthLoginHandler oAuthLoginHandler = new OAuthLoginHandler() {
-                @Override
-                public void run(boolean success) {
-                    if (success) {
+//            OAuthLoginHandler oAuthLoginHandler = new OAuthLoginHandler() {
+//                @Override
+//                public void run(boolean success) {
+//                    if (success) {
 //                        String accessToken = naverOAuthLogin.getAccessToken(mContext);
 //                        String refreshToken = naverOAuthLogin.getRefreshToken(mContext);
 //                        long expireAt = naverOAuthLogin.getExpiresAt(mContext);
 //                        String tokenType = naverOAuthLogin.getTokenType(mContext);
-
-                    } else {
-                        String errorCode = naverOAuthLogin.getLastErrorCode(mContext).getCode();
-                        String errorDesc = naverOAuthLogin.getLastErrorDesc(mContext);
-                        //Log.e("Error",errorCode +"&&" +errorDesc)
-                        Toast.makeText(mContext, "errorCode:" + errorCode + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();;
-                    }
-                }
-            };
-            naverOAuthLogin.startOauthLoginActivity(SignInActivity.this, oAuthLoginHandler);
+//
+//                    } else {
+//                        String errorCode = naverOAuthLogin.getLastErrorCode(mContext).getCode();
+//                        String errorDesc = naverOAuthLogin.getLastErrorDesc(mContext);
+//                        //Log.e("Error",errorCode +"&&" +errorDesc)
+//                        Toast.makeText(mContext, "errorCode:" + errorCode + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();;
+//                    }
+//                }
+//            };
+//            naverOAuthLogin.startOauthLoginActivity(SignInActivity.this, oAuthLoginHandler);
 
         }
     };
@@ -232,7 +244,20 @@ public class SignInActivity extends AppCompatActivity {
     View.OnClickListener kakaoSignIn = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            UserApiClient.getInstance().loginWithKakaoAccount(SignInActivity.this, new Function2<OAuthToken, Throwable, Unit>() {
+                @Override
+                public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                    if (oAuthToken != null) {
 
+                    }
+
+                    if (throwable != null) {
+
+                    }
+                    updateKakaoUserData();
+                    return null;
+                }
+            });
         }
     };
 
@@ -261,9 +286,14 @@ public class SignInActivity extends AppCompatActivity {
                             String result = null;
 
                             // 구글 아이디 존재 여부 확인
-                            urlAddr = ShareVar.macIP + "/jsp/userEmailSelect.jsp?" + "email=" + email;
+                            urlAddr = ShareVar.macIP + "jsp/userEmailSelect.jsp?" + "email=" + email;
                             result = connectSignInData();
                             if(result.equals("exist")) {
+                                //Set Share preferences
+//                                SharedPreferences.Editor editor = auto.edit();
+//                                editor.putString("emailId", email);
+//                                editor.commit();
+
                                 Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                                 startActivity(intent);
 
@@ -272,7 +302,7 @@ public class SignInActivity extends AppCompatActivity {
 
                             } else if(result.equals("none")) {
                                 String pwd = "google";
-                                urlAddr = ShareVar.macIP + "/jsp/userInsertGoogleReturn.jsp?" + "email=" + email + "&pwd=" + pwd +"&name=" + name;
+                                urlAddr = ShareVar.macIP + "jsp/userInsertGoogleReturn.jsp?" + "email=" + email + "&pwd=" + pwd +"&name=" + name;
 
                                 result = connectSignInData();
                                 if(result.equals("1")){
@@ -296,6 +326,65 @@ public class SignInActivity extends AppCompatActivity {
                 });
     }
 
+    private void updateKakaoUserData() {
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable throwable) {
+                if (user != null) {
+                    String result = null;
+                    kakaoName = user.getKakaoAccount().getProfile().getNickname();
+                    kakaoEmail = user.getKakaoAccount().getEmail();
+                    kakaoPhone = user.getKakaoAccount().getPhoneNumber();
+                    String pwd = "kakao";
+
+                    urlAddr = ShareVar.macIP + "jsp/userEmailSelect.jsp?" + "email=" + kakaoEmail;
+                    result = connectSignInData();
+                    if(result.equals("exist")) {
+                        //Set Share preferences
+//                                SharedPreferences.Editor editor = auto.edit();
+//                                editor.putString("emailId", email);
+//                                editor.commit();
+                        Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                        startActivity(intent);
+
+                        // Set share id
+                        ShareVar.loginEmail = kakaoEmail;
+                    } else if(result.equals("none")) {
+                        urlAddr = ShareVar.macIP + "jsp/userInsertGoogleReturn.jsp?" + "email=" + kakaoEmail + "&pwd=" + pwd +"&name=" + kakaoName + "&phone=" + kakaoPhone;
+                        result = connectSignInData();
+                        if(result.equals("1")){
+                            //Intent
+                            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                            startActivity(intent);
+
+                            // Set share id
+                            ShareVar.loginEmail = kakaoEmail;
+                        }
+                    } else {
+                        Log.e("Error",": surver");
+                    }
+
+                }
+                return null;
+            }
+        });
+//        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+//            @Override
+//            public Unit invoke(User user, Throwable throwable) {
+//                if (user != null) {
+//                    kakaoName = user.getKakaoAccount().getProfile().getNickname();
+//                    kakaoEmail = user.getKakaoAccount().getEmail();
+//                    kakaoPhone = user.getKakaoAccount().getPhoneNumber();
+//
+//                    Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+//                    startActivity(intent);
+//
+//                } else {
+//
+//                }
+//            };
+//        });
+    }
     private String connectSignInData(){
         String result = null;
         try {
