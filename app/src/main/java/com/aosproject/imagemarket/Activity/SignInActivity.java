@@ -302,7 +302,8 @@ public class SignInActivity extends AppCompatActivity {
 
                             } else if(result.equals("none")) {
                                 String pwd = "google";
-                                urlAddr = ShareVar.macIP + "jsp/userInsertGoogleReturn.jsp?" + "email=" + email + "&pwd=" + pwd +"&name=" + name;
+                                String phone = "none";
+                                urlAddr = ShareVar.macIP + "jsp/userInsertGoogleReturn.jsp?" + "email=" + email + "&pwd=" + pwd +"&name=" + name + "&phone=" + phone;
 
                                 result = connectSignInData();
                                 if(result.equals("1")){
