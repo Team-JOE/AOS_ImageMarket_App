@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class SearchResultFragment extends Fragment {
     ArrayList<JsonImageDY> images = null;
     String searched;
     ImageAdapterDY adapter;
+    FrameLayout frameLayout;
 
     @Nullable
     @Override
@@ -37,6 +39,7 @@ public class SearchResultFragment extends Fragment {
         recyclerView = view.findViewById(R.id.searched_recycler_view);
         layoutManager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(layoutManager);
+        frameLayout = view.findViewById(R.id.frame_not_found);
 
         searched = getActivity().getIntent().getExtras().getString("searched");
         return view;
@@ -62,7 +65,11 @@ public class SearchResultFragment extends Fragment {
             images = (ArrayList<JsonImageDY>) obj;
             if (images.size() == 0) {
                 // 검색 결과가 없습니다
+                frameLayout.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
             } else {
+                frameLayout.setVisibility(View.INVISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
                 adapter = new ImageAdapterDY(getContext(), images);
                 recyclerView.setAdapter(adapter);
 

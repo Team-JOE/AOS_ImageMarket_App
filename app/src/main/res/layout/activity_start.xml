@@ -11,7 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.2"
-        ></LinearLayout>
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/watermark"
+                ></ImageView>
+        <ImageView
+            android:padding="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo">
+        </ImageView>
+        </FrameLayout>
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_marginHorizontal="8dp"
