@@ -288,6 +288,7 @@ public class SignInActivity extends AppCompatActivity {
                             // 구글 아이디 존재 여부 확인
                             urlAddr = ShareVar.macIP + "jsp/userEmailSelect.jsp?" + "email=" + email;
                             result = connectSignInData();
+                            Log.e("Google", urlAddr);
                             if(result.equals("exist")) {
                                 //Set Share preferences
 //                                SharedPreferences.Editor editor = auto.edit();
@@ -304,7 +305,7 @@ public class SignInActivity extends AppCompatActivity {
                                 String pwd = "google";
                                 String phone = "none";
                                 urlAddr = ShareVar.macIP + "jsp/userInsertGoogleReturn.jsp?" + "email=" + email + "&pwd=" + pwd +"&name=" + name + "&phone=" + phone;
-
+                                Log.e("Google", urlAddr);
                                 result = connectSignInData();
                                 if(result.equals("1")){
                                     //Set Share preferences
