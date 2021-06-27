@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +72,6 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         getSupportActionBar().hide();
-
         mContext = getApplicationContext();
 
         auto = getSharedPreferences("signInState", Activity.MODE_PRIVATE);
@@ -85,12 +85,12 @@ public class SignInActivity extends AppCompatActivity {
 //                "Imjoy");
 
         //구글 로그인 set
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//        auth = FirebaseAuth.getInstance();
-//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("172358253431-4u2o1bk9dknno561kqcrkl8o9vk267sc.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        auth = FirebaseAuth.getInstance();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //카카오 로그인 set
         KakaoSdk.init(this, "f72a922b4ec45b6a0dd8bdc40124b8e6");
@@ -338,7 +338,9 @@ public class SignInActivity extends AppCompatActivity {
                     String pwd = "kakao";
 
                     urlAddr = ShareVar.macIP + "jsp/userEmailSelect.jsp?" + "email=" + kakaoEmail;
+                    Log.e("urlAddr", urlAddr);
                     result = connectSignInData();
+                    Log.e("result", result);
                     if(result.equals("exist")) {
                         //Set Share preferences
 //                                SharedPreferences.Editor editor = auto.edit();
@@ -368,22 +370,6 @@ public class SignInActivity extends AppCompatActivity {
                 return null;
             }
         });
-//        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-//            @Override
-//            public Unit invoke(User user, Throwable throwable) {
-//                if (user != null) {
-//                    kakaoName = user.getKakaoAccount().getProfile().getNickname();
-//                    kakaoEmail = user.getKakaoAccount().getEmail();
-//                    kakaoPhone = user.getKakaoAccount().getPhoneNumber();
-//
-//                    Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-//                    startActivity(intent);
-//
-//                } else {
-//
-//                }
-//            };
-//        });
     }
     private String connectSignInData(){
         String result = null;
@@ -394,7 +380,6 @@ public class SignInActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        //Log.d("Result",result);
         return result;
     }
 
