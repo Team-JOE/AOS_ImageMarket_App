@@ -18,6 +18,10 @@
         android:layout_marginVertical="8dp"
         ></TextView>
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
     <FrameLayout
         android:layout_marginHorizontal="4dp"
         android:id="@+id/layout_show_photo"
@@ -25,6 +29,7 @@
         android:layout_height="100dp"
         android:layout_marginVertical="2dp"
         >
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -144,7 +149,7 @@
             android:scaleType="centerCrop">
         </ImageView>
     </LinearLayout>
-
+    </ScrollView>
 
 <!--    <GridView-->
 <!--        android:id="@+id/grid_popular"-->
