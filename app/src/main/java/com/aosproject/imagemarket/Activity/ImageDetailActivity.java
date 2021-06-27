@@ -49,7 +49,7 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
     String urlAddr, urlAddr2, urlAddr3, urlAddr4, urlAddr5, urlAddr6, urlAddr7, urlAddr8, user_email, filepath, locationTitle = null;
     int code, recommend = 0;
     TextView detailImageName, detailImageRecommend, detailImagePrice, detailImageFormat, detailImageDetail, detailImageCategory, detailImageLocation, detailImageSeller = null;
-    ImageView imageView, back, recommendOff, recommendOn = null;
+    ImageView imageView, back, recommendOff, recommendOn, noImage = null;
     ArrayList<ImageHJ> images = null;
     ArrayList<DealHJ> deals = null;
     Chip c0, c1, c2, c3, c4, c5, c6, c7, c8 = null;
@@ -106,6 +106,7 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
         linearLayout = findViewById(R.id.detail_layout);
         buy1 = findViewById(R.id.detail_btn_buy);
         buy2 = findViewById(R.id.detail_btn_buy_slide);
+        noImage = findViewById(R.id.detail_no_image);
         cart1 = findViewById(R.id.detail_btn_cart);
         cart2 = findViewById(R.id.detail_btn_cart_slide);
         recommendOff = findViewById(R.id.detail_iv_recommend_off);
@@ -178,15 +179,17 @@ public class ImageDetailActivity extends AppCompatActivity implements OnMapReady
             NetworkTaskImageHJ networkTask = new NetworkTaskImageHJ(ImageDetailActivity.this, urlAddr3, "imageSelect");
             Object obj = networkTask.execute().get();
             images = (ArrayList<ImageHJ>) obj;
-            filepath = images.get(0).getFilepath();
-            Log.v("Message", images.get(0).getFilepath() + "log");
-
-            adapter = new ImageDetailAdapterHJ(ImageDetailActivity.this, R.layout.detail_custom_layout, images);
-            recyclerView.setAdapter(adapter);
-
-            MyListDecoration decoration = new MyListDecoration();
-            recyclerView.addItemDecoration(decoration);
-
+            if(images.size()==0){
+                noImage.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }else {
+                filepath = images.get(0).getFilepath();
+                Log.v("Message", images.get(0).getFilepath() + "log");
+                adapter = new ImageDetailAdapterHJ(ImageDetailActivity.this, R.layout.detail_custom_layout, images);
+                recyclerView.setAdapter(adapter);
+                MyListDecoration decoration = new MyListDecoration();
+                recyclerView.addItemDecoration(decoration);
+            }
         } catch (Exception e) {
             Log.v("Message", "error");
             e.printStackTrace();

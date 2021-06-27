@@ -1,10 +1,8 @@
 package com.aosproject.imagemarket.Activity;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,20 +18,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskImageAddHJ;
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskImageHJ;
 import com.aosproject.imagemarket.R;
 import com.aosproject.imagemarket.Util.ShareVar;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 public class ImageAddImageActivity extends AppCompatActivity {
-
     String imageName = null;
     ImageView uploadImg, imageView = null;
     Button button = null;
