@@ -120,7 +120,9 @@ public class MyPage extends Activity {
 
             switch (v.getId()) {
                 case R.id.profile_iv_mypage_back:
-                    finish();
+                    intent = new Intent(MyPage.this, MainActivity.class);
+                    intent.putExtra("imgList", 4);
+                    startActivity(intent);
                     break;
                 case R.id.profile_layout_mypage_account:
                     intent = new Intent(MyPage.this, MyPage_Account.class);
