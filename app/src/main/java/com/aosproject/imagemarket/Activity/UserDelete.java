@@ -3,6 +3,8 @@ package com.aosproject.imagemarket.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +23,7 @@ public class UserDelete extends Activity {
 
     TextView profile_tv_user_delete;
     ImageView back;
-
+    SharedPreferences auto = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,12 @@ public class UserDelete extends Activity {
                     }else {
                         Toast.makeText(UserDelete.this, "회원 탈퇴 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         // Intent 첫화면
+                        auto = getSharedPreferences("signInState", Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = auto.edit();
+                        editor.putString("emailId", null);
+                        editor.commit();
+                        Intent intentStart = new Intent(UserDelete.this, StartActivity.class);
+                        startActivity(intentStart);
                     }
                     break;
                 case R.id.profile_iv_user_delete:

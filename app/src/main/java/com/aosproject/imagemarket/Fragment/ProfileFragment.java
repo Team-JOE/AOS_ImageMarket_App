@@ -22,6 +22,7 @@ import com.aosproject.imagemarket.Activity.MyPage;
 import com.aosproject.imagemarket.Activity.RecommendList;
 import com.aosproject.imagemarket.Activity.SellList;
 import com.aosproject.imagemarket.Activity.SellReport;
+import com.aosproject.imagemarket.Activity.StartActivity;
 import com.aosproject.imagemarket.Activity.UserDelete;
 import com.aosproject.imagemarket.NetworkTask.NetworkTaskProfileMain;
 import com.aosproject.imagemarket.R;
@@ -145,8 +146,10 @@ public class ProfileFragment extends Fragment {
                     // 로그아웃
                     auto = getActivity().getSharedPreferences("signInState", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = auto.edit();
-                    editor.putString("emailId", loginEmail);
+                    editor.putString("emailId", null);
                     editor.commit();
+                    Intent intentStart = new Intent(getActivity(), StartActivity.class);
+                    startActivity(intentStart);
                     break;
                 case R.id.profile_tv_user_delete:
                     intent = new Intent(getActivity(), UserDelete.class);
