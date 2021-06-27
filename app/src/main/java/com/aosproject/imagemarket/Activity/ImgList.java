@@ -84,10 +84,12 @@ public class ImgList extends Activity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.profile_iv_imglist_back:
-                    finish();
+                    Intent intent = new Intent(ImgList.this, MainActivity.class);
+                    intent.putExtra("imgList", 4);
+                    startActivity(intent);
                     break;
                 case R.id.profile_layout_imglist_additem:
-                    Intent intent = new Intent(ImgList.this, ImageAddImageActivity.class);
+                    intent = new Intent(ImgList.this, ImageAddImageActivity.class);
                     startActivity(intent);
                     break;
             }

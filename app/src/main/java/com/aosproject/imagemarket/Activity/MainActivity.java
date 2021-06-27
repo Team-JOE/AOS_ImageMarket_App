@@ -26,6 +26,7 @@ import static com.aosproject.imagemarket.R.id.item_fragment3;
 public class MainActivity extends AppCompatActivity {
 
     private int fromImageDetailViewToCartPage;
+    private int fromImgListToProfilePage;
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         fromImageDetailViewToCartPage = intent.getIntExtra("cart", 0);
+        fromImgListToProfilePage = intent.getIntExtra("imgList", 0);
 
 
         bottomNavigationView = findViewById(R.id.tabar_nav);
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(fromImageDetailViewToCartPage == 3){
             bottomNavigationView.setSelectedItemId(R.id.item_fragment3);
+        }else if(fromImgListToProfilePage == 4){
+            bottomNavigationView.setSelectedItemId(R.id.item_fragment4);
         }else{
             bottomNavigationView.setSelectedItemId(R.id.item_fragment1);
         }
